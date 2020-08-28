@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2020 - TODAY, Marcel Savegnago - Escodoo
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+    <data>
+        <template id="report_repair_order_technical_information_document">
+            <t t-call="web.external_layout">
+                <t t-set="doc" t-value="doc.with_context(lang=doc.user_id.partner_id.lang)" />
+
+                <div class="page">
+                    <div class="oe_structure" />
+
+                    <h2 class="mt16">
+                        <t>
+                            <span>Technical Information</span>
+                        </t>
+                    </h2>
+
+                    <h3 class="mt16">
+                        <span t-field="doc.name" />
+                    </h3>
+
+                    <div class="row mt32 mb32" id="informations">
+<!--                        <div t-if="doc.owner_user_id" class="col-auto mw-100 mb-2">-->
+<!--                            <strong>Requested By:</strong>-->
+<!--                            <p class="m-0" t-field="doc.owner_user_id" />-->
+<!--                        </div>-->
+
+<!--                        <div t-if="doc.request_date" class="col-auto mw-100 mb-2">-->
+<!--                            <strong>Request Date:</strong>-->
+<!--                            <p class="m-0" t-field="doc.request_date" />-->
+<!--                        </div>-->
+
+
+                    </div>
+
+
+
+<!--                    <div class="row mt32 mb32" id="description">-->
+<!--                        <div t-if="doc.description" class="col-auto mw-100 mb-2">-->
+<!--                            <strong>Description:</strong>-->
+<!--                            <p class="m-0" t-field="doc.description" />-->
+<!--                        </div>-->
+<!--                    </div>-->
+
+                </div>
+            </t>
+        </template>
+
+        <template id="report_repair_order_technical_information">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="repair_technical_information.report_repair_order_technical_information_document" t-lang="doc.user_id.partner_id.lang" />
+                </t>
+            </t>
+        </template>
+
+        <report
+            id="action_report_repair_order_technical_information"
+            string="Repair Technical Report"
+            model="repair.order"
+            report_type="qweb-pdf"
+            file="repair_technical_information.report_repair_order_technical_information"
+            name="repair_technical_information.report_repair_order_technical_information"
+            print_report_name="'Repair Technical Report - %s' % (object.name)"
+        />
+    </data>
+</odoo>
