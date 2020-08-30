@@ -4,24 +4,24 @@
 
 <odoo>
 
-    <record id="view_repair_order_timeline_view" model="ir.ui.view">
+    <record id="view_repair_order_timeline" model="ir.ui.view">
         <field name="name">Repair Orders Timeline</field>
         <field name="model">repair.order</field>
         <field name="type">timeline</field>
         <field name="arch" type="xml">
             <timeline date_start="date_repair"
-                      date_stop="date_repair"
                       string="Repairs"
                       default_group_by="user_id"
                       event_open_popup="true"
                       zoomKey="ctrlKey"
+                      mode="week"
                       colors="#ec7063:user_id == false;#2ecb71:kanban_state=='done';">
-                <field name="user_id"/>
+                <field name="partner_id"/>
                 <templates>
                     <div t-name="timeline-item">
                         <div t-esc="record.display_name"/>
-                        Assigned to:
-                        <span t-esc="record.user_id[1]"/>
+                        Customer:
+                        <span t-esc="record.partner_id[1]"/>
                     </div>
                 </templates>
             </timeline>

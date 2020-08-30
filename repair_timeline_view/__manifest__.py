@@ -5,6 +5,7 @@
     'name': 'Repair Timeline View',
     'summary': """
         Add timeline view""",
+    'category': 'Manufacturing',
     'version': '12.0.1.0.0',
     'license': 'AGPL-3',
     'author': 'Escodoo,Odoo Community Association (OCA)',
@@ -15,7 +16,5 @@
     ],
     'data': [
         'views/repair_order.xml',
-    ],
-    'demo': [
     ],
 }
