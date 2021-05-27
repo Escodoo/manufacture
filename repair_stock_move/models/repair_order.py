@@ -37,10 +37,8 @@ class RepairOrder(models.Model):
         },
     )
 
-
     # This method was inserted here, but in V14 it is already native to the repair module. Another option
     # is to include it in the base_repair module
-
     def unlink(self):
         for order in self:
             if order.state not in ('draft', 'cancel'):
@@ -74,7 +72,7 @@ class RepairOrder(models.Model):
         self.ensure_one()
         return self.env["stock.move"].create(
             {
-                "name": self.name,
+                "name": self.name + ' - Equipamento',
                 "product_id": self.product_id.id,
                 "product_uom": self.product_uom.id or self.product_id.uom_id.id,
                 "product_uom_qty": self.product_qty,
@@ -91,12 +89,12 @@ class RepairOrder(models.Model):
         res = super().action_repair_confirm()
         for repair in self:
             moves = self.env["stock.move"]
+            move = repair._create_repair_stock_move()
+            repair.move_id = move
             for operation in repair.operations:
                 move = operation.create_stock_move()
                 moves |= move
                 operation.write({"move_id": move.id})
-            move = repair._create_repair_stock_move()
-            repair.move_id = move
         self.mapped('stock_move_ids').\
             filtered(lambda x: x.state != 'cancel')._action_confirm()
         return res
