@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2023 - TODAY, Marcel Savegnago <marcel.savegnago@escodoo.com.br>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record model="qc.trigger" id="qc_trigger_purchase">
+        <field name="name">Purchase Invoiced</field>
+        <field name="company_id" />
+    </record>
+</odoo>
